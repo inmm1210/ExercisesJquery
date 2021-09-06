@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./toDoStyle.css" type="text/css" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+
+    <input type="submit" id="estilo" class="btn btn-primary">
+    <div class="container mt-4 ">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Completed</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+
+            </tbody>
+        </table>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+            // const mostrarData = (data) => {
+            //     let body = ''
+            //     for (let i = 0; i < data.length; i++) {
+            //         body += `<tr><td>${data[i].id}</td><td>${data[i].title}</td><td>${data[i].completed}</td></tr>`
+            //     }
+            //     document.getElementById('data').innerHTML = body
+            // }
+
+            // $(document).ready(function () {
+            //     // el signo de $ significa que es jquery 
+            //     $.ajax({
+            //         url: "https://jsonplaceholder.typicode.com/todos",
+            //         contentType: "application/json",
+            //         dataType: 'json',
+            //         success: function (result) { //result es como nosotros queremos llamar lo que nos retorna
+            //             mostrarData(result);
+            //         },
+            //         failure: function (result) {
+            //             console.log('La llamada no se pudo completas');
+            //         }
+            //     });
+
+            // });
+            // $('#estilo').click(function() {
+            //     $('td:nth-child(3)')
+            //     .each((i, td) => {  
+            //         if (td.textContent.startsWith('t')) {
+            //             td.setAttribute('class', 'lTrue');
+            //         }
+            //         if (td.textContent.startsWith('f')) {
+            //             td.setAttribute('class', 'lFalse');
+            //         }
+            //     });
+            // });
+
+
+            $(document).ready(function () {
+                // el signo de $ significa que es jquery 
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/todos",
+                    contentType: "application/json",
+                    dataType: 'json',
+                    type:'get',
+                    success: function (result) { //result es como nosotros queremos llamar lo que nos retorna
+                        todoList.forEach(todo => {
+                            let newRow =`
+                            <tr>
+                                <td>${result.id}</td>
+                                <td>${result.title}</td>
+                                <td>${result.completed}</td>                       
+                            </tr>
+                            `;
+                            $("#data").append(newRow);
+                        });
+                        $('td:contains(true)').parent().addClass('alt');
+                        //mostrarData(result);
+                    },
+                    failure: function (result) {
+                        console.log('La llamada no se pudo completas');
+                    }
+                });
+
+            });
+
+            
+            
+
+
+
+
+
+        </script>
+
+</body>
+
+</html>
